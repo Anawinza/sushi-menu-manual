@@ -26,35 +26,32 @@
             font-size: 1.5em; 
         }
         
-        /* * * * * * ส่วนที่แก้ไขเพื่อให้เลื่อนได้ * * * * *
-        */
+        /* ส่วนสำหรับเมนูที่เลื่อนได้ */
         .nav-menu {
             display: flex;
-            flex-wrap: nowrap; /* *สำคัญ* ไม่อนุญาตให้ขึ้นบรรทัดใหม่ ทำให้ปุ่มอยู่แถวเดียวกัน */
-            overflow-x: auto; /* *สำคัญ* ทำให้เลื่อนดูได้ในแนวนอนเมื่อเนื้อหาเกิน */
-            justify-content: flex-start; /* จัดเรียงปุ่มจากซ้าย */
-            gap: 8px; /* ระยะห่างระหว่างปุ่ม */
+            flex-wrap: nowrap;
+            overflow-x: auto; 
+            justify-content: flex-start;
+            gap: 8px; 
             padding: 5px 10px;
-            -webkit-overflow-scrolling: touch; /* ปรับปรุงการเลื่อนบน iOS */
+            -webkit-overflow-scrolling: touch;
         }
         
         .nav-menu::-webkit-scrollbar {
-            display: none; /* ซ่อน scrollbar ในเบราว์เซอร์ Webkit (Chrome, Safari) */
+            display: none; 
         }
-        /* * * * * * สิ้นสุดส่วนที่แก้ไข * * * * *
-        */
         
         .nav-menu button {
             background-color: #2980b9;
             color: white;
             border: none;
-            padding: 6px 10px; /* ลด padding เพื่อให้เล็กลง */
+            padding: 6px 10px;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
-            font-size: 0.9em; /* ปรับขนาดให้เล็กลง */
-            flex-shrink: 0; /* *สำคัญ* ป้องกันไม่ให้ปุ่มหดตัว */
-            min-width: fit-content; /* ความกว้างขั้นต่ำตามเนื้อหา */
+            font-size: 0.9em;
+            flex-shrink: 0;
+            min-width: fit-content;
         }
         .nav-menu button:hover, .nav-menu button.active {
             background-color: #e67e22;
@@ -65,7 +62,7 @@
             padding: 10px;
             background-color: #fff;
         }
-        /* ซ่อนทุกส่วนตามค่าเริ่มต้น (จะแสดงด้วย JavaScript เมื่อคลิกปุ่ม) */
+        /* ซ่อนทุกส่วนตามค่าเริ่มต้น */
         .image-section {
             display: none; 
             padding: 10px 0;
@@ -93,17 +90,15 @@
 
         /* สำหรับหน้าจอที่มีขนาดใหญ่ขึ้น (เช่น Tablet/Desktop) */
         @media (min-width: 768px) {
-            /* สำหรับ Desktop/Tablet ปรับกลับให้แสดงเป็นปกติหรือตามที่ต้องการ */
             .nav-menu {
-                flex-wrap: wrap; /* อนุญาตให้ขึ้นบรรทัดใหม่ได้ */
-                justify-content: center; /* จัดให้อยู่ตรงกลาง */
-                overflow-x: visible; /* ไม่ให้เลื่อนได้ */
+                flex-wrap: wrap; 
+                justify-content: center;
+                overflow-x: visible;
                 gap: 10px;
                 padding: 10px 20px;
             }
             .nav-menu button {
-                font-size: 0.9em;
-                flex-shrink: 1; /* อนุญาตให้หดตัวได้ */
+                flex-shrink: 1;
             }
             .image-gallery {
                 max-width: 900px;
@@ -127,7 +122,9 @@
             <button onclick="showSection('sashimi')" id="btn-sashimi">Salmon/Tuna Sashimi</button>
             <button onclick="showSection('rice')" id="btn-rice">การเตรียมข้าว</button>
             <button onclick="showSection('bento')" id="btn-bento">Salmon Sushi Bento</button>
-        </div>
+            
+            <button onclick="goToFreshFood()">เมนู Fresh Food</button>
+            </div>
     </div>
 
     <div class="image-gallery">
@@ -141,7 +138,6 @@
             <h2 class="section-header">2. ชุด Sushi Party Set และ Sashimi Set</h2>
             <img src="659011_0.jpg" alt="Sushi Party Set และ Sashimi Set" class="menu-image">
         </div>
-
         <div id="section-crabstick" class="image-section">
             <h2 class="section-header">3. รายละเอียด Crabstick Maki</h2>
             <img src="659003_0.jpg" alt="รายละเอียด Crabstick Maki" class="menu-image">
@@ -212,6 +208,19 @@
             // เลื่อนหน้าจอขึ้นไปด้านบนเพื่อให้เห็นเนื้อหาใหม่
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+        
+        // ********* ฟังก์ชันใหม่สำหรับการลิงก์ภายนอก *********
+        function goToFreshFood() {
+            // เปิดลิงก์ที่ต้องการในแท็บใหม่
+            window.open('https://anawinza.github.io/-Fresh-Food/', '_blank');
+            
+            // ลบสถานะ active ออกจากปุ่มทั้งหมด (ทางเลือก: เพื่อให้ดูเหมือนไม่ได้เลือกปุ่มใด ๆ ในหน้านี้)
+            const buttons = document.querySelectorAll('.nav-menu button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+        }
+        // *******************************************************
         
         // กำหนดให้แสดง 'ภาพรวมเมนู' เป็นค่าเริ่มต้นเมื่อเปิดหน้า
         document.addEventListener('DOMContentLoaded', () => {
