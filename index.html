@@ -23,32 +23,44 @@
         }
         .header h1 {
             margin: 0 0 10px 0;
-            font-size: 1.5em; /* ปรับให้เล็กลงสำหรับมือถือ */
+            font-size: 1.5em; 
         }
+        
+        /* * * * * * ส่วนที่แก้ไขเพื่อให้เลื่อนได้ * * * * *
+        */
         .nav-menu {
             display: flex;
-            flex-wrap: wrap; /* ให้ปุ่มขึ้นบรรทัดใหม่เมื่อหน้าจอแคบ */
-            justify-content: center;
-            gap: 5px; /* ระยะห่างระหว่างปุ่ม */
+            flex-wrap: nowrap; /* *สำคัญ* ไม่อนุญาตให้ขึ้นบรรทัดใหม่ ทำให้ปุ่มอยู่แถวเดียวกัน */
+            overflow-x: auto; /* *สำคัญ* ทำให้เลื่อนดูได้ในแนวนอนเมื่อเนื้อหาเกิน */
+            justify-content: flex-start; /* จัดเรียงปุ่มจากซ้าย */
+            gap: 8px; /* ระยะห่างระหว่างปุ่ม */
             padding: 5px 10px;
+            -webkit-overflow-scrolling: touch; /* ปรับปรุงการเลื่อนบน iOS */
         }
+        
+        .nav-menu::-webkit-scrollbar {
+            display: none; /* ซ่อน scrollbar ในเบราว์เซอร์ Webkit (Chrome, Safari) */
+        }
+        /* * * * * * สิ้นสุดส่วนที่แก้ไข * * * * *
+        */
+        
         .nav-menu button {
             background-color: #2980b9;
             color: white;
             border: none;
-            padding: 8px 12px;
+            padding: 6px 10px; /* ลด padding เพื่อให้เล็กลง */
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
-            font-size: 0.8em; /* ปรับให้เล็กลงสำหรับมือถือ */
-            flex-grow: 1; /* ให้ปุ่มขยายความกว้างเต็มที่ */
-            min-width: 120px; /* ความกว้างขั้นต่ำของปุ่ม */
+            font-size: 0.9em; /* ปรับขนาดให้เล็กลง */
+            flex-shrink: 0; /* *สำคัญ* ป้องกันไม่ให้ปุ่มหดตัว */
+            min-width: fit-content; /* ความกว้างขั้นต่ำตามเนื้อหา */
         }
         .nav-menu button:hover, .nav-menu button.active {
             background-color: #e67e22;
         }
         .image-gallery {
-            max-width: 100%; /* ใช้ความกว้างเต็มที่ของมือถือ */
+            max-width: 100%;
             margin: 0 auto;
             padding: 10px;
             background-color: #fff;
@@ -66,10 +78,10 @@
             color: #c0392b;
             padding: 10px 0;
             margin-top: 20px;
-            font-size: 1.2em; /* ปรับให้เล็กลงสำหรับมือถือ */
+            font-size: 1.2em;
         }
         .menu-image {
-            width: 100%; /* สำคัญ: ทำให้รูปภาพเต็มความกว้างของหน้าจอมือถือ */
+            width: 100%;
             height: auto;
             margin-top: 10px;
             margin-bottom: 10px;
@@ -81,13 +93,17 @@
 
         /* สำหรับหน้าจอที่มีขนาดใหญ่ขึ้น (เช่น Tablet/Desktop) */
         @media (min-width: 768px) {
+            /* สำหรับ Desktop/Tablet ปรับกลับให้แสดงเป็นปกติหรือตามที่ต้องการ */
             .nav-menu {
+                flex-wrap: wrap; /* อนุญาตให้ขึ้นบรรทัดใหม่ได้ */
+                justify-content: center; /* จัดให้อยู่ตรงกลาง */
+                overflow-x: visible; /* ไม่ให้เลื่อนได้ */
                 gap: 10px;
                 padding: 10px 20px;
             }
             .nav-menu button {
                 font-size: 0.9em;
-                flex-grow: 0;
+                flex-shrink: 1; /* อนุญาตให้หดตัวได้ */
             }
             .image-gallery {
                 max-width: 900px;
@@ -160,7 +176,7 @@
             <h2 class="section-header">9. การหุงข้าวและอัตราส่วนน้ำส้มสายชู</h2>
             <img src="659008_0.jpg" alt="การหุงข้าวและอัตราส่วนน้ำส้มสายชู" class="menu-image">
         </div>
-             
+            
         <div id="section-bento" class="image-section">
             <h2 class="section-header">10. รายละเอียด Salmon Sushi Bento</h2>
             <img src="659019_0.jpg" alt="รายละเอียดเมนู Salmon Sushi Bento" class="menu-image">
