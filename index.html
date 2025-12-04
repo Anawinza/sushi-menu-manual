@@ -3,230 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>รายละเอียดเมนูซูชิ Villa Market (Mobile View)</title>
+    <title>ศูนย์รวมเมนู (Main Index)</title>
     <style>
         body {
             font-family: 'Tahoma', sans-serif;
-            background-color: #f7f7f7; 
+            background-color: #f7f7f7;
             margin: 0;
-            padding: 0;
-            text-align: center; 
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh; /* ให้เต็มหน้าจอ */
         }
-        .header {
+        .main-header {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2em;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .menu-container {
+            display: flex;
+            flex-direction: column; /* จัดเรียงปุ่มเป็นแนวตั้ง */
+            gap: 15px; /* ระยะห่างระหว่างปุ่ม */
+            width: 90%;
+            max-width: 400px; /* จำกัดความกว้างเพื่อความสวยงามบนมือถือ */
+        }
+        .menu-link {
+            text-decoration: none; /* ลบขีดเส้นใต้ลิงก์ */
+            display: block;
+        }
+        .menu-button {
             background-color: #3498db;
             color: white;
-            padding: 10px 0;
-            position: sticky; 
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .header h1 {
-            margin: 0 0 10px 0;
-            font-size: 1.5em; 
-        }
-        
-        /* ส่วนสำหรับเมนูที่เลื่อนได้ */
-        .nav-menu {
-            display: flex;
-            flex-wrap: nowrap;
-            overflow-x: auto; 
-            justify-content: flex-start;
-            gap: 8px; 
-            padding: 5px 10px;
-            -webkit-overflow-scrolling: touch;
-        }
-        
-        .nav-menu::-webkit-scrollbar {
-            display: none; 
-        }
-        
-        .nav-menu button {
-            background-color: #2980b9;
-            color: white;
             border: none;
-            padding: 6px 10px;
-            border-radius: 5px;
+            padding: 15px 20px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s;
-            font-size: 0.9em;
-            flex-shrink: 0;
-            min-width: fit-content;
-        }
-        .nav-menu button:hover, .nav-menu button.active {
-            background-color: #e67e22;
-        }
-        .image-gallery {
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 10px;
-            background-color: #fff;
-        }
-        /* ซ่อนทุกส่วนตามค่าเริ่มต้น */
-        .image-section {
-            display: none; 
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-        }
-        .image-section.active {
-            display: block;
-        }
-        .section-header {
-            color: #c0392b;
-            padding: 10px 0;
-            margin-top: 20px;
-            font-size: 1.2em;
-        }
-        .menu-image {
+            transition: background-color 0.3s, transform 0.1s;
+            font-size: 1.1em;
+            font-weight: bold;
             width: 100%;
-            height: auto;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            border-radius: 5px;
-            display: block;
-            border: 1px solid #ccc; 
+            box-shadow: 0 4px #2980b9; /* ทำให้ดูมีมิติ */
         }
-
-        /* สำหรับหน้าจอที่มีขนาดใหญ่ขึ้น (เช่น Tablet/Desktop) */
-        @media (min-width: 768px) {
-            .nav-menu {
-                flex-wrap: wrap; 
-                justify-content: center;
-                overflow-x: visible;
-                gap: 10px;
-                padding: 10px 20px;
-            }
-            .nav-menu button {
-                flex-shrink: 1;
-            }
-            .image-gallery {
-                max-width: 900px;
-                padding: 20px;
-            }
+        .menu-button:hover {
+            background-color: #2980b9;
+        }
+        .menu-button:active {
+            transform: translateY(4px); /* เอฟเฟกต์กดปุ่ม */
+            box-shadow: 0 0 #2980b9;
+        }
+        .menu-button.fresh-food {
+            background-color: #27ae60; /* สีเขียวสำหรับ Fresh Food */
+            box-shadow: 0 4px #229954;
+        }
+        .menu-button.fresh-food:hover {
+            background-color: #229954;
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>🍣 รายละเอียดเมนูซูชิ Villa Market</h1>
-        <div class="nav-menu">
-            <button onclick="showSection('all')" id="btn-all">ภาพรวมเมนู</button>
-            <button onclick="showSection('set')" id="btn-set">ชุดซูชิ/ซาชิมิ</button>
-            <button onclick="showSection('crabstick')" id="btn-crabstick">Crabstick Maki</button>
-            <button onclick="showSection('salmonroe')" id="btn-salmonroe">Salmon Roe Maki</button>
-            <button onclick="showSection('california')" id="btn-california">California Maki</button>
-            <button onclick="showSection('kappa')" id="btn-kappa">Kappa Maki</button>
-            <button onclick="showSection('salmonroll')" id="btn-salmonroll">Salmon Roll Ikura</button>
-            <button onclick="showSection('sashimi')" id="btn-sashimi">Salmon/Tuna Sashimi</button>
-            <button onclick="showSection('rice')" id="btn-rice">การเตรียมข้าว</button>
-            <button onclick="showSection('bento')" id="btn-bento">Salmon Sushi Bento</button>
-            
-            <button onclick="goToFreshFood()">เมนู Fresh Food</button>
-            </div>
+    <h1 class="main-header">🍣 ศูนย์รวมเว็บไซต์เมนูอาหาร</h1>
+
+    <div class="menu-container">
+        <a href="sushi-menu.html" class="menu-link">
+            <button class="menu-button">รายละเอียดเมนูซูชิ Villa Market</button>
+        </a>
+
+        <a href="https://anawinza.github.io/-Fresh-Food/" target="_blank" class="menu-link">
+            <button class="menu-button fresh-food">เมนู Fresh Food (เว็บไซต์ภายนอก)</button>
+        </a>
+
+        <a href="#" class="menu-link">
+            <button class="menu-button" style="background-color: #f39c12; box-shadow: 0 4px #e67e22;">
+                📝 เมนูอื่น ๆ ในอนาคต
+            </button>
+        </a>
     </div>
-
-    <div class="image-gallery">
-        
-        <div id="section-all" class="image-section">
-            <h2 class="section-header">1. ภาพรวมเมนู Standard SUSHI</h2>
-            <img src="659009_0.jpg" alt="เมนูรวม Standard Sushi" class="menu-image">
-        </div>
-        
-        <div id="section-set" class="image-section">
-            <h2 class="section-header">2. ชุด Sushi Party Set และ Sashimi Set</h2>
-            <img src="659011_0.jpg" alt="Sushi Party Set และ Sashimi Set" class="menu-image">
-        </div>
-        <div id="section-crabstick" class="image-section">
-            <h2 class="section-header">3. รายละเอียด Crabstick Maki</h2>
-            <img src="659003_0.jpg" alt="รายละเอียด Crabstick Maki" class="menu-image">
-        </div>
-
-        <div id="section-salmonroe" class="image-section">
-            <h2 class="section-header">4. รายละเอียด Salmon Roe Maki</h2>
-            <img src="659004_0.jpg" alt="รายละเอียด Salmon Roe Maki" class="menu-image">
-        </div>
-        
-        <div id="section-california" class="image-section">
-            <h2 class="section-header">5. รายละเอียด California Maki</h2>
-            <img src="659006_0.jpg" alt="รายละเอียด California Maki" class="menu-image">
-        </div>
-
-        <div id="section-kappa" class="image-section">
-            <h2 class="section-header">6. รายละเอียด Kappa Maki</h2>
-            <img src="659005_0.jpg" alt="รายละเอียด Kappa Maki" class="menu-image">
-        </div>
-        
-        <div id="section-salmonroll" class="image-section">
-            <h2 class="section-header">7. รายละเอียด Salmon Roll Ikura Sushi</h2>
-            <img src="659010_0.jpg" alt="รายละเอียด Salmon Roll Ikura Sushi" class="menu-image">
-        </div>
-
-        <div id="section-sashimi" class="image-section">
-            <h2 class="section-header">8. รายละเอียด Salmon/Tuna Sashimi</h2>
-            <img src="659007_0.jpg" alt="รายละเอียด Salmon Sashimi / Tuna Sashimi" class="menu-image">
-        </div>
-        
-        <div id="section-rice" class="image-section">
-            <h2 class="section-header">9. การหุงข้าวและอัตราส่วนน้ำส้มสายชู</h2>
-            <img src="659008_0.jpg" alt="การหุงข้าวและอัตราส่วนน้ำส้มสายชู" class="menu-image">
-        </div>
-            
-        <div id="section-bento" class="image-section">
-            <h2 class="section-header">10. รายละเอียด Salmon Sushi Bento</h2>
-            <img src="659019_0.jpg" alt="รายละเอียดเมนู Salmon Sushi Bento" class="menu-image">
-        </div>
-
-    </div>
-
-    <script>
-        function showSection(sectionId) {
-            // ซ่อนทุกส่วน
-            const sections = document.querySelectorAll('.image-section');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // ลบสถานะ active ออกจากปุ่มทั้งหมด
-            const buttons = document.querySelectorAll('.nav-menu button');
-            buttons.forEach(button => {
-                button.classList.remove('active');
-            });
-
-            // แสดงส่วนที่เลือกและกำหนดสถานะ active ให้ปุ่ม
-            const selectedSection = document.getElementById('section-' + sectionId);
-            const selectedButton = document.getElementById('btn-' + sectionId);
-            
-            if (selectedSection) {
-                selectedSection.classList.add('active');
-            }
-            if (selectedButton) {
-                selectedButton.classList.add('active');
-            }
-            
-            // เลื่อนหน้าจอขึ้นไปด้านบนเพื่อให้เห็นเนื้อหาใหม่
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        
-        // ********* ฟังก์ชันใหม่สำหรับการลิงก์ภายนอก *********
-        function goToFreshFood() {
-            // เปิดลิงก์ที่ต้องการในแท็บใหม่
-            window.open('https://anawinza.github.io/-Fresh-Food/', '_blank');
-            
-            // ลบสถานะ active ออกจากปุ่มทั้งหมด (ทางเลือก: เพื่อให้ดูเหมือนไม่ได้เลือกปุ่มใด ๆ ในหน้านี้)
-            const buttons = document.querySelectorAll('.nav-menu button');
-            buttons.forEach(button => {
-                button.classList.remove('active');
-            });
-        }
-        // *******************************************************
-        
-        // กำหนดให้แสดง 'ภาพรวมเมนู' เป็นค่าเริ่มต้นเมื่อเปิดหน้า
-        document.addEventListener('DOMContentLoaded', () => {
-            showSection('all');
-        });
-    </script>
 
 </body>
 </html>
