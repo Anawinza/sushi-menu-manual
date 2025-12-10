@@ -26,35 +26,31 @@
             font-size: 1.5em; 
         }
         
-        /* * * * * * ส่วนที่แก้ไขเพื่อให้เลื่อนได้ * * * * *
-        */
         .nav-menu {
             display: flex;
-            flex-wrap: nowrap; /* *สำคัญ* ไม่อนุญาตให้ขึ้นบรรทัดใหม่ ทำให้ปุ่มอยู่แถวเดียวกัน */
-            overflow-x: auto; /* *สำคัญ* ทำให้เลื่อนดูได้ในแนวนอนเมื่อเนื้อหาเกิน */
-            justify-content: flex-start; /* จัดเรียงปุ่มจากซ้าย */
-            gap: 8px; /* ระยะห่างระหว่างปุ่ม */
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            justify-content: flex-start;
+            gap: 8px;
             padding: 5px 10px;
-            -webkit-overflow-scrolling: touch; /* ปรับปรุงการเลื่อนบน iOS */
+            -webkit-overflow-scrolling: touch;
         }
         
         .nav-menu::-webkit-scrollbar {
-            display: none; /* ซ่อน scrollbar ในเบราว์เซอร์ Webkit (Chrome, Safari) */
+            display: none; 
         }
-        /* * * * * * สิ้นสุดส่วนที่แก้ไข * * * * *
-        */
         
         .nav-menu button {
             background-color: #2980b9;
             color: white;
             border: none;
-            padding: 6px 10px; /* ลด padding เพื่อให้เล็กลง */
+            padding: 6px 10px;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
-            font-size: 0.9em; /* ปรับขนาดให้เล็กลง */
-            flex-shrink: 0; /* *สำคัญ* ป้องกันไม่ให้ปุ่มหดตัว */
-            min-width: fit-content; /* ความกว้างขั้นต่ำตามเนื้อหา */
+            font-size: 0.9em;
+            flex-shrink: 0;
+            min-width: fit-content;
         }
         .nav-menu button:hover, .nav-menu button.active {
             background-color: #e67e22;
@@ -65,7 +61,7 @@
             padding: 10px;
             background-color: #fff;
         }
-        /* ซ่อนทุกส่วนตามค่าเริ่มต้น (จะแสดงด้วย JavaScript เมื่อคลิกปุ่ม) */
+        
         .image-section {
             display: none; 
             padding: 10px 0;
@@ -93,17 +89,16 @@
 
         /* สำหรับหน้าจอที่มีขนาดใหญ่ขึ้น (เช่น Tablet/Desktop) */
         @media (min-width: 768px) {
-            /* สำหรับ Desktop/Tablet ปรับกลับให้แสดงเป็นปกติหรือตามที่ต้องการ */
             .nav-menu {
-                flex-wrap: wrap; /* อนุญาตให้ขึ้นบรรทัดใหม่ได้ */
-                justify-content: center; /* จัดให้อยู่ตรงกลาง */
-                overflow-x: visible; /* ไม่ให้เลื่อนได้ */
+                flex-wrap: wrap; 
+                justify-content: center; 
+                overflow-x: visible; 
                 gap: 10px;
                 padding: 10px 20px;
             }
             .nav-menu button {
                 font-size: 0.9em;
-                flex-shrink: 1; /* อนุญาตให้หดตัวได้ */
+                flex-shrink: 1; 
             }
             .image-gallery {
                 max-width: 900px;
@@ -117,16 +112,33 @@
     <div class="header">
         <h1>🍣 รายละเอียดเมนูซูชิ Villa Market</h1>
         <div class="nav-menu">
-            <button onclick="showSection('all')" id="btn-all">ภาพรวมเมนู</button>
-            <button onclick="showSection('set')" id="btn-set">ชุดซูชิ/ซาชิมิ</button>
-            <button onclick="showSection('crabstick')" id="btn-crabstick">Crabstick Maki</button>
-            <button onclick="showSection('salmonroe')" id="btn-salmonroe">Salmon Roe Maki</button>
-            <button onclick="showSection('california')" id="btn-california">California Maki</button>
-            <button onclick="showSection('kappa')" id="btn-kappa">Kappa Maki</button>
-            <button onclick="showSection('salmonroll')" id="btn-salmonroll">Salmon Roll Ikura</button>
-            <button onclick="showSection('sashimi')" id="btn-sashimi">Salmon/Tuna Sashimi</button>
-            <button onclick="showSection('rice')" id="btn-rice">การเตรียมข้าว</button>
-            <button onclick="showSection('bento')" id="btn-bento">Salmon Sushi Bento</button>
+            <button onclick="showSection('all')" id="btn-all">1. ภาพรวมเมนู</button>
+            <button onclick="showSection('rice')" id="btn-rice">2. การเตรียมข้าว</button> 
+            
+            <button onclick="showSection('sashimiprocess')" id="btn-sashimiprocess">3. วิธีหั่น Salmon Sashimi</button> 
+            <button onclick="showSection('tunasashimi')" id="btn-tunasashimi">4. Tuna Sashimi</button>
+            <button onclick="showSection('sashimi')" id="btn-sashimi">5. Salmon/Tuna Sashimi</button>
+            
+            <button onclick="showSection('salmon')" id="btn-salmon">6. ข้าวปั้นหน้าแซลมอน</button> 
+            <button onclick="showSection('tunasushi')" id="btn-tunasushi">7. ข้าวปั้นหน้าทูน่า</button> 
+            <button onclick="showSection('inari')" id="btn-inari">8. ข้าวปั้นหน้าเต้าหู้</button> 
+            
+            <button onclick="showSection('set')" id="btn-set">9. ชุดซูชิ/ซาชิมิ</button>
+            <button onclick="showSection('tunabento')" id="btn-tunabento">10. เบนโตะ ทูน่าซูชิ</button>
+            <button onclick="showSection('ebikobento')" id="btn-ebikobento">11. เบนโตะไข่กุ้ง</button> 
+            <button onclick="showSection('bento')" id="btn-bento">12. Salmon Sushi Bento</button>
+            <button onclick="showSection('tamagobento')" id="btn-tamagobento">13. เบนโตะไข่หวาน</button> 
+            <button onclick="showSection('sashimibento')" id="btn-sashimibento">14. เบนโตะแซลมอนซาชิมิ</button> 
+            
+            <button onclick="showSection('makimix')" id="btn-makimix">15. มากิรวม (Maki Mix)</button> 
+            <button onclick="showSection('tunamaki')" id="btn-tunamaki">16. มากิไส้ปลาทูน่า</button> 
+            <button onclick="showSection('crabstick')" id="btn-crabstick">17. Crabstick Maki</button>
+            <button onclick="showSection('salmonroe')" id="btn-salmonroe">18. Salmon Roe Maki</button>
+            <button onclick="showSection('california')" id="btn-california">19. California Maki</button>
+            <button onclick="showSection('californiasalmon')" id="btn-californiasalmon">20. California Salmon Roll</button> 
+            <button onclick="showSection('kappa')" id="btn-kappa">21. Kappa Maki</button>
+            <button onclick="showSection('salmonroll')" id="btn-salmonroll">22. Salmon Roll Ikura</button>
+            <button onclick="showSection('salmonrolleb')" id="btn-salmonrolleb">23. Salmon Roll EB</button>
         </div>
     </div>
 
@@ -137,51 +149,115 @@
             <img src="659009_0.jpg" alt="เมนูรวม Standard Sushi" class="menu-image">
         </div>
         
+        <div id="section-rice" class="image-section">
+            <h2 class="section-header">2. การหุงข้าวและอัตราส่วนน้ำส้มสายชู</h2>
+            <img src="659008_0.jpg" alt="การหุงข้าวและอัตราส่วนน้ำส้มสายชู" class="menu-image">
+        </div>
+
+        <div id="section-sashimiprocess" class="image-section">
+            <h2 class="section-header">3. วิธีหั่น Salmon Sashimi (รวมหนัง 150g, 0.5 มิล)</h2>
+            <img src="255.PNG" alt="ขั้นตอนการเตรียมและหั่น Salmon Sashimi" class="menu-image">
+        </div>
+
+        <div id="section-tunasashimi" class="image-section">
+            <h2 class="section-header">4. ซาชิมิ ทูน่า (Tuna Sashimi)</h2>
+            <img src="20.PNG" alt="เมนู Tuna Sashimi" class="menu-image">
+        </div>
+        
+        <div id="section-sashimi" class="image-section">
+            <h2 class="section-header">5. รายละเอียด Salmon/Tuna Sashimi (ทั่วไป)</h2>
+            <img src="659007_0.jpg" alt="รายละเอียด Salmon Sashimi / Tuna Sashimi" class="menu-image">
+        </div>
+        
+        <div id="section-salmon" class="image-section">
+            <h2 class="section-header">6. ข้าวปั้นหน้าแซลมอน (Salmon Sushi)</h2>
+            <img src="6.PNG" alt="เมนู Salmon Sushi" class="menu-image">
+        </div>
+
+        <div id="section-tunasushi" class="image-section">
+            <h2 class="section-header">7. ข้าวปั้นหน้าทูน่า (Tuna Sushi)</h2>
+            <img src="19.PNG" alt="เมนู Tuna Sushi" class="menu-image">
+        </div>
+
+        <div id="section-inari" class="image-section">
+            <h2 class="section-header">8. ข้าวปั้นหน้าเต้าหู้ (Inari Sushi)</h2>
+            <img src="11.PNG" alt="เมนู Inari Sushi" class="menu-image">
+        </div>
+
         <div id="section-set" class="image-section">
-            <h2 class="section-header">2. ชุด Sushi Party Set และ Sashimi Set</h2>
+            <h2 class="section-header">9. ชุด Sushi Party Set และ Sashimi Set</h2>
             <img src="659011_0.jpg" alt="Sushi Party Set และ Sashimi Set" class="menu-image">
         </div>
 
+        <div id="section-tunabento" class="image-section">
+            <h2 class="section-header">10. เบนโตะ ทูน่าซูชิ (Tuna Sushi Bento)</h2>
+            <img src="21.PNG" alt="เมนู Tuna Sushi Bento" class="menu-image">
+        </div>
+
+        <div id="section-ebikobento" class="image-section">
+            <h2 class="section-header">11. เบนโตะไข่กุ้ง (Ebiko Sushi Bento)</h2>
+            <img src="18.PNG" alt="เมนู Ebiko Sushi Bento" class="menu-image">
+        </div>
+
+        <div id="section-bento" class="image-section">
+            <h2 class="section-header">12. รายละเอียด Salmon Sushi Bento</h2>
+            <img src="659019_0.jpg" alt="รายละเอียดเมนู Salmon Sushi Bento" class="menu-image">
+        </div>
+        
+        <div id="section-tamagobento" class="image-section">
+            <h2 class="section-header">13. เบนโตะไข่หวาน (Tamago Bento Sushi)</h2>
+            <img src="15.PNG" alt="เมนู Tamago Bento Sushi" class="menu-image">
+        </div>
+
+        <div id="section-sashimibento" class="image-section">
+            <h2 class="section-header">14. เบนโตะแซลมอนซาชิมิ (Salmon Sashimi Bento)</h2>
+            <img src="4.PNG" alt="เมนู Salmon Sashimi Bento" class="menu-image">
+        </div>
+
+        <div id="section-makimix" class="image-section">
+            <h2 class="section-header">15. มากิรวม (Maki Mix)</h2>
+            <img src="14.PNG" alt="เมนู Maki Mix" class="menu-image">
+        </div>
+
+        <div id="section-tunamaki" class="image-section">
+            <h2 class="section-header">16. มากิไส้ปลาทูน่า (Tuna Maki)</h2>
+            <img src="9.PNG" alt="เมนู Tuna Maki" class="menu-image">
+        </div>
+
         <div id="section-crabstick" class="image-section">
-            <h2 class="section-header">3. รายละเอียด Crabstick Maki</h2>
+            <h2 class="section-header">17. รายละเอียด Crabstick Maki</h2>
             <img src="659003_0.jpg" alt="รายละเอียด Crabstick Maki" class="menu-image">
         </div>
 
         <div id="section-salmonroe" class="image-section">
-            <h2 class="section-header">4. รายละเอียด Salmon Roe Maki</h2>
+            <h2 class="section-header">18. รายละเอียด Salmon Roe Maki</h2>
             <img src="659004_0.jpg" alt="รายละเอียด Salmon Roe Maki" class="menu-image">
         </div>
         
         <div id="section-california" class="image-section">
-            <h2 class="section-header">5. รายละเอียด California Maki</h2>
+            <h2 class="section-header">19. รายละเอียด California Maki</h2>
             <img src="659006_0.jpg" alt="รายละเอียด California Maki" class="menu-image">
         </div>
 
+        <div id="section-californiasalmon" class="image-section">
+            <h2 class="section-header">20. แคลิฟอร์เนียแซลมอนโรล</h2>
+            <img src="12.PNG" alt="เมนู California Salmon Roll" class="menu-image">
+        </div>
+
         <div id="section-kappa" class="image-section">
-            <h2 class="section-header">6. รายละเอียด Kappa Maki</h2>
+            <h2 class="section-header">21. รายละเอียด Kappa Maki</h2>
             <img src="659005_0.jpg" alt="รายละเอียด Kappa Maki" class="menu-image">
         </div>
-        
+
         <div id="section-salmonroll" class="image-section">
-            <h2 class="section-header">7. รายละเอียด Salmon Roll Ikura Sushi</h2>
+            <h2 class="section-header">22. รายละเอียด Salmon Roll Ikura Sushi</h2>
             <img src="659010_0.jpg" alt="รายละเอียด Salmon Roll Ikura Sushi" class="menu-image">
         </div>
-
-        <div id="section-sashimi" class="image-section">
-            <h2 class="section-header">8. รายละเอียด Salmon/Tuna Sashimi</h2>
-            <img src="659007_0.jpg" alt="รายละเอียด Salmon Sashimi / Tuna Sashimi" class="menu-image">
-        </div>
         
-        <div id="section-rice" class="image-section">
-            <h2 class="section-header">9. การหุงข้าวและอัตราส่วนน้ำส้มสายชู</h2>
-            <img src="659008_0.jpg" alt="การหุงข้าวและอัตราส่วนน้ำส้มสายชู" class="menu-image">
+        <div id="section-salmonrolleb" class="image-section">
+            <h2 class="section-header">23. ซูชิแซลมอนโรลไข่กุ้ง</h2>
+            <img src="10.PNG" alt="เมนู Salmon Roll Sushi EB" class="menu-image">
         </div>
-            
-        <div id="section-bento" class="image-section">
-            <h2 class="section-header">10. รายละเอียด Salmon Sushi Bento</h2>
-            <img src="659019_0.jpg" alt="รายละเอียดเมนู Salmon Sushi Bento" class="menu-image">
-        </div>
-
     </div>
 
     <script>
